@@ -3,8 +3,6 @@ const { check } = require('express-validator');
 const validateAttributes = require('../middleware/validateAttributes')
 require('dotenv').config();
 
-require('dotenv');
-
 const router = Router();
 const usuariosController = require('../controllers/usuarios.controllers');
 
