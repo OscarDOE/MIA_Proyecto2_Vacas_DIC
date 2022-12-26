@@ -17,4 +17,13 @@ app.get('/', (req, res) => {
 //Ruta de Usuarios
 app.use('/usuarios', require('./routes/usuarios.route'));
 
+//Ruta de Vuelos
+app.use('/vuelos', require('./routes/usuarios.route'));
+
+//Ruta de Carros
+app.use('/carros', require('./routes/usuarios.route'));
+
+//Ruta de Usuarios
+//app.use('/usuarios', require('./routes/usuarios.route'));
+
 module.exports = app;
