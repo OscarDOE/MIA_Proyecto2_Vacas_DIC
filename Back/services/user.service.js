@@ -5,26 +5,7 @@ const AmamazonCognitoIdentity = require('amazon-cognito-identity-js');
 
 const { signUpCognito, signInCognito } = require("./cognito");
 //const { uploadFile } = require("../middleware/bucket");
-users = [
-//   {
-//     id:0,
-//     type:"0",
-// usuario:"oscar",
-// name:"pedro",
-// email:"elmco13@gmail.com",
-// image:"https://web-mia-vacas.s3.amazonaws.com/81-813622_user-uploaded-image-real-life-articuno-pokemon.jpg",
-// password:"abvc123"
-// },
-// {
-//   id:1,
-//   type:"2",
-// usuario:"luis",
-// name:"sansa",
-// email:"pedros25@gmail.com",
-// image:"5.jpg",
-// password:"123abc"
-// }
-]
+users = []
 id = 0
 const register_cognito = async (req, res) => {
   const { usuario, password } = req.body;
@@ -52,13 +33,16 @@ const login_cognito = async (req, res) => {
   console.log('Datos recibidos', usuario);
   //-----
   // aqui hacer la validacion de que se encuentre el usuario en la estructura de datos
-  UserService.findOne
   await signInCognito(req,res);
 
-  const userName = users.find(item => item.usuario === usuario);
+  let userName = users.find(item => item.usuario === usuario);
   
   if(!userName){
     return {message: "Username: " + userName + ", no existe"}
+  }
+  userName = {
+    ...userName,
+    tam:users.length
   }
 
   return userName
@@ -76,9 +60,18 @@ class UserService {
       // console.log(userEncontrado)
     }else{
       id++;
-      var newUser = {
-          id: id,
-          ...data
+      if(users.length==0){
+        var newUser = {
+            id: id,
+            ...data,
+            type:"0"
+        }
+      }else{
+        var newUser = {
+            id: id,
+            ...data,
+            
+        }
       }
       users.push(newUser);
       newUser = {

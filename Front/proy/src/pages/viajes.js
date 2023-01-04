@@ -3,6 +3,7 @@ import Nav from '../components/navbar';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Cookies from "universal-cookie"
+import { Link, useNavigate } from 'react-router-dom';
 
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -13,14 +14,35 @@ import { useEffect, useState } from 'react';
 export const Viajes = () =>{
 
     const [viajes, setViajes] = useState([]);
+    const navigate = useNavigate()
+    const cookies = new Cookies();
+    let initcookie = cookies.get("session")
 
-    useEffect(()=>{
-        fetch('http://localhost:5000/viajes')
+   useEffect(()=>{
+
+        if(!!cookies.get("session")){
+            const cookie = cookies.get("session")
+            if(cookie.type =="0"){
+                fetch('http://localhost:5000/viajes')
             .then(res => res.json())
             .then(res => 
                 setViajes(res)
             )
             .catch(err => console.error(err));
+            }
+            else if(cookie.type =="1"){
+                navigate('/receptionist')
+            }
+            else if(cookie.type =="2"){
+                navigate('/user')
+            }else{
+                navigate('/')
+            }
+        }else{
+            navigate('/')
+        }
+
+
     }, []);
 
     const eliminar = (e) => {

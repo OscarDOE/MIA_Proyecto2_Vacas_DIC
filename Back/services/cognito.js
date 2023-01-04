@@ -39,8 +39,10 @@ const signUpCognito = async(req, res) => {
             // return res.status(500).send()
         }else{
             console.log("NO HUBO ERROR", userPool)
-            console.log(data)
-             res.status(200).send(data);
+            console.log("data",data)
+            res.status(200).json({
+                msg:"0"
+            });
         }
     });
 }

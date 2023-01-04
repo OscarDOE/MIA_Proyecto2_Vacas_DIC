@@ -13,7 +13,7 @@ export const AdminUsuarios = () =>{
     const [carros, setCarros] = useState([]);
     const cookies = new Cookies();
     const navigate = useNavigate()
-
+    
     useEffect(()=>{
             console.log("EFFECT FORMUSUARIOS")
             if(!!cookies.get("session")){
@@ -56,8 +56,11 @@ export const AdminUsuarios = () =>{
 
     const ver = (e) => {
         console.log("DENTRO DE VEWR")
+        if(!!cookies.get("ver")){
+            cookies.remove("ver")
+            cookies.set("ver",e)
+        }
     }
-
     let img = "./logo.png"
     
     return (

@@ -13,15 +13,15 @@ export const CarrosUser = () =>{
     const [carros, setCarros] = useState([]);
     let datos = {}
     const navigate = useNavigate()
-    
-
+    const cookies = new Cookies();
+    let initcookie = cookies.get("session")
     const agregar = async (e) => {
         datos = {
             carro:"1",
             viaje:"0",
-            iduser:e.id,
-            usuario:e.usuario,
-            email:e.email,
+            iduser:initcookie.id,
+            usuario:initcookie.usuario,
+            email:initcookie.email,
             Estado:"Pendiente",
             Agency:e.Agency,
             Brand:e.Brand,
@@ -40,7 +40,6 @@ export const CarrosUser = () =>{
             body:JSON.stringify(datos)
         })
     }
-    const cookies = new Cookies();
 
     useEffect(()=>{
 

@@ -48,7 +48,7 @@ const [show, setShow] = useState(true);
         })
     }
     let location = useLocation();
-    const enviarDatos = (event) => {
+    const enviarDatos = async (event) => {
         event.preventDefault()
         if(datos.name == '' || datos.usuario == '' || datos.email == '' || datos.password == '' || datos.confirmP == ''   ){
             console.log("HAY UNO VACIO")
@@ -65,7 +65,7 @@ const [show, setShow] = useState(true);
         formenviar.append("confirmP",datos.confirmP);
         formenviar.append("type","2");      
         
-        const resp = fetch('http://localhost:5000/users/registro',{
+        const resp = await fetch('http://localhost:5000/users/registro',{
             method:'POST',
             body:formenviar
         }).then(res => res.json()
@@ -73,17 +73,20 @@ const [show, setShow] = useState(true);
             console.log("REPUESTA DEL JSON",res)
             console.log("REPUESTA DEL JSON MESSAGE",res.msg)
             if(res.msg =="1"){
+                alert("El usuario ya existe")
                 userexiste = false
             }else if(res.msg =="2"){
+                alert("Se ha alcanzado un límite de correos diarios")
                 limitedecorreos = false
             }else if(res.msg =="3"){
+                alert("Debe de ingresar todos los parámetros para poder registrarse")
                 invalidparameter = false
             }else if(res.msg =="4"){
                 invalidparameter = false
             }else if(res.msg =="5"){
                 invalidparameter = false
             }else if(res.msg == "0"){
-                alert(`Usuario ${res.usuario} registrado correctamente`)
+                alert(`Usuario ${datos.usuario} registrado correctamente`)
                 cambiarpagina('/login');
 
             }
