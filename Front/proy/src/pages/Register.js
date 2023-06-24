@@ -65,7 +65,7 @@ const [show, setShow] = useState(true);
         formenviar.append("confirmP",datos.confirmP);
         formenviar.append("type","2");      
         
-        const resp = await fetch('http://localhost:5000/users/registro',{
+        const resp = await fetch(`http://${process.env.REACT_APP_PUERTO}:5000/users/registro`,{
             method:'POST',
             body:formenviar
         }).then(res => res.json()

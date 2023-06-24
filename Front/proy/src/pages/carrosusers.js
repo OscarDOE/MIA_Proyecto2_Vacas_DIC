@@ -32,7 +32,7 @@ export const CarrosUser = () =>{
         }
         
         console.log("DATOS",datos)
-        await fetch(`http://localhost:5000/solicitudes`,{
+        await fetch(`http://${process.env.REACT_APP_PUERTO}:5000/solicitudes`,{
             method:"POST",
             headers: {
                 "Content-Type":"application/json"
@@ -52,7 +52,7 @@ export const CarrosUser = () =>{
                 navigate('/receptionist')
             }
             else if(cookie.type =="2"){
-                fetch('http://localhost:5000/autos')
+                fetch(`http://${process.env.REACT_APP_PUERTO}:5000/autos`)
                     .then(res => res.json())
                     .then(res => 
                             setCarros(res)

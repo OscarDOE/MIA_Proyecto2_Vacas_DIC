@@ -21,7 +21,7 @@ export const ReceptionistSolicitudes = () =>{
             if(cookie.type =="0"){
             }
             else if(cookie.type =="1"){
-                fetch('http://localhost:5000/solicitudes')
+                fetch(`http://${process.env.REACT_APP_PUERTO}:5000/solicitudes`)
                     .then(res => res.json())
                     .then(res => 
                             setCarros(res)
@@ -46,7 +46,7 @@ export const ReceptionistSolicitudes = () =>{
             ...datos,
             Estado:"Denegada"
         }
-        const datosnuevos = fetch(`http://localhost:5000/solicitudes/${e.id}`,{
+        const datosnuevos = fetch(`http://${process.env.REACT_APP_PUERTO}:5000/solicitudes/${e.id}`,{
             method:"PATCH",
             headers:{
                 "Content-Type":"application/json"
@@ -63,7 +63,7 @@ export const ReceptionistSolicitudes = () =>{
             ...datos,
             Estado:"Aceptada"
         }
-        const datosnuevos = fetch(`http://localhost:5000/solicitudes/${e.id}`,{
+        const datosnuevos = fetch(`http://${process.env.REACT_APP_PUERTO}:5000/solicitudes/${e.id}`,{
             method:"PATCH",
             headers:{
                 "Content-Type":"application/json"

@@ -41,7 +41,7 @@ export const ViajesUser = () =>{
         }
         
         console.log("DATOS",datos)
-        await fetch(`http://localhost:5000/solicitudes`,{
+        await fetch(`http://${process.env.REACT_APP_PUERTO}:5000/solicitudes`,{
             method:"POST",
             headers: {
                 "Content-Type":"application/json"
@@ -62,7 +62,7 @@ export const ViajesUser = () =>{
                 navigate('/receptionist')
             }
             else if(cookie.type =="2"){
-                fetch('http://localhost:5000/viajes')
+                fetch(`http://${process.env.REACT_APP_PUERTO}:5000/viajes`)
             .then(res => res.json())
             .then(res => 
                 setViajes(res)

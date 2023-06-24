@@ -13,7 +13,7 @@ export const Carros = () =>{
     const [carros, setCarros] = useState([]);
 
     useEffect(()=>{
-        fetch('http://localhost:5000/carros')
+        fetch(`http://${process.env.REACT_APP_PUERTO}:5000/carros`)
             .then(res => res.json())
             .then(res => 
                     setCarros(res)

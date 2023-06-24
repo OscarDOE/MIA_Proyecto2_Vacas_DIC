@@ -29,7 +29,7 @@ export const FormCarros = () =>{
         event.preventDefault()
         
         console.log('enviando datos...' + datos.name + ' ' + datos.usuario+ ' ' + datos.email + ' ' + datos.image + ' ' + datos.password + ' ' + datos.confirmP)
-        fetch('http://localhost:5000/autos',{
+        fetch(`http://${process.env.REACT_APP_PUERTO}:5000/autos`,{
             method: 'POST',
             headers: {
                 "Content-Type":"application/json"

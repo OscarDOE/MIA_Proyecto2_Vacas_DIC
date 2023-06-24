@@ -23,7 +23,7 @@ export const Carros = () =>{
         if(!!cookies.get("session")){
             const cookie = cookies.get("session")
             if(cookie.type =="0"){
-                fetch('http://localhost:5000/autos')
+                fetch(`http://${process.env.REACT_APP_PUERTO}:5000/autos`)
                 .then(res => res.json())
                 .then(res => 
                         setCarros(res)
@@ -49,7 +49,7 @@ export const Carros = () =>{
     const eliminar = (e) => {
         console.log(e)
         console.log("ENTRO A ELIMINAR")
-        const datosnuevos = fetch(`http://localhost:5000/autos/${e.id}`,{
+        const datosnuevos = fetch(`http://${process.env.REACT_APP_PUERTO}:5000/autos/${e.id}`,{
             method:"DELETE"
         })
     }

@@ -22,7 +22,7 @@ export const SolicitudesUser = () =>{
         if(!!cookies.get("session")){
             const cookie = cookies.get("session")
             if(cookie.type =="0"){
-                fetch('http://localhost:5000/solicitudes')
+                fetch(`http://${process.env.REACT_APP_PUERTO}:5000/solicitudes`)
                     .then(res => res.json())
                     .then(res => 
                             setCarros(res)
@@ -44,14 +44,14 @@ export const SolicitudesUser = () =>{
     const denegar = (e) => {
         console.log(e)
         console.log("ENTRO A ELIMINAR")
-        const datosnuevos = fetch(`http://localhost:5000/users/${e.id}`,{
+        const datosnuevos = fetch(`http://${process.env.REACT_APP_PUERTO}:5000/users/${e.id}`,{
             method:"PATCH"
         })
     }
     const aceptar = (e) => {
         console.log(e)
         console.log("ENTRO A ELIMINAR")
-        const datosnuevos = fetch(`http://localhost:5000/users/${e.id}`,{
+        const datosnuevos = fetch(`http://${process.env.REACT_APP_PUERTO}:5000/users/${e.id}`,{
             method:"PATCH"
         })
     }

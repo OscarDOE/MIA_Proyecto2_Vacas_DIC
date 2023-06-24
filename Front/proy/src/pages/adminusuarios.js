@@ -19,7 +19,7 @@ export const AdminUsuarios = () =>{
             if(!!cookies.get("session")){
                 const cookie = cookies.get("session")
                 if(cookie.type =="0"){
-                    fetch('http://localhost:5000/users')
+                    fetch(`http://${process.env.REACT_APP_PUERTO}:5000/users`)
                         .then(res => res.json())
                         .then(res => 
                                 setCarros(res)
@@ -43,7 +43,7 @@ export const AdminUsuarios = () =>{
     const eliminar = (e) => {
         console.log(e)
         console.log("ENTRO A ELIMINAR")
-        const datosnuevos = fetch(`http://localhost:5000/users/${e.id}`,{
+        const datosnuevos = fetch(`http://${process.env.REACT_APP_PUERTO}:5000/users/${e.id}`,{
             method:"DELETE",
             headers:{
                 "Content-Type":"application/json"

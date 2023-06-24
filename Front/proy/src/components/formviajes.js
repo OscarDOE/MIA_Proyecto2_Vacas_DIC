@@ -40,7 +40,7 @@ export const FormViajes = () =>{
         // console.log("DENTRO DE ENIVAR",datos)
         // console.log('enviando datos...' + datos.Agency + ' ' + datos.From+ ' ' + datos.To + ' ' + ' ' + datos.Days + ' ' + datos.Price)
 
-        const datosnuevos = fetch('http://localhost:5000/viajes',{
+        const datosnuevos = fetch(`http://${process.env.REACT_APP_PUERTO}:5000/viajes`,{
             method: 'POST',
             headers: {
                 "Content-Type":"application/json",

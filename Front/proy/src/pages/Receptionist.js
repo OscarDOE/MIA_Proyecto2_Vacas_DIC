@@ -22,7 +22,7 @@ export const Receptionist = () =>{
             }
             else if(cookie.type =="1"){
 
-                fetch(`http://localhost:5000/users/${initcookie.id}`)
+                fetch(`http://${process.env.REACT_APP_PUERTO}:5000/users/${initcookie.id}`)
             .then(res => res.json())
             .then(res => {
                 setViajes(res)

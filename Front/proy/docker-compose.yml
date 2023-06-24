@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+
+  frontend:
+    image: '7771512001/mia-vacas-front-2022'
+    container_name: 'front-mia-2022'
+    environment:
+      REACT_APP_PUERTO: "44.202.140.74" #localhost
+    ports:
+      - '3000:3000' #del no de hub al mio
+    restart: always

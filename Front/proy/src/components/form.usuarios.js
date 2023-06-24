@@ -11,6 +11,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import '../App.css'
 
+
+let userexiste = true;
+let limitedecorreos = true;
+let invalidparameter = true;
 export const FormUsuarios = () =>{
 
     const [datos, setDatos] = useState(
@@ -32,8 +36,8 @@ export const FormUsuarios = () =>{
     const [e,setE] = useState(null);
 
     const navigate = useNavigate()
-    const cambiarpagina = () => {
-        navigate('/usuarios')
+    const cambiarpagina = (e) => {
+        navigate()
     }
 
     const handleInputChange = (event) => {
@@ -43,7 +47,7 @@ export const FormUsuarios = () =>{
         })
     }
     let location = useLocation();
-    const enviarDatos = (event) => {
+    const enviarDatos = async (event) => {
         event.preventDefault()
         console.log("TIPO DE USUARIO",tipoUser)
         const formenviar = new FormData();
@@ -58,28 +62,38 @@ export const FormUsuarios = () =>{
             formenviar.append("type","1")
        }else if(tipoUser == 'Turista'){
             formenviar.append("type","2")
+        }else{
+           formenviar.append("type","2")
        }
-      
-        
-        const resp = fetch('http://localhost:5000/users/registro',{
+        const resp = await fetch(`http://${process.env.REACT_APP_PUERTO}:5000/users/registro`,{
             method:'POST',
             body:formenviar
 
-        })
-        formenviar.delete('name')
-        formenviar.delete('usuario')
-        formenviar.delete('email')
-        formenviar.delete('image')
-        formenviar.delete('password')
-        formenviar.delete('confirmP')
-        formenviar.delete('type')
-        const response =  resp.json()
-        if(response.status === 400){
-            setE(response.message);
-        }else{
-            setE(null);
-            alert("Usuario Registrado")
-        }
+        }).then(res => res.json()
+        .then(res => {
+            console.log("REPUESTA DEL JSON",res)
+            console.log("REPUESTA DEL JSON MESSAGE",res.msg)
+            if(res.msg =="1"){
+                alert("El usuario ya existe")
+                userexiste = false
+            }else if(res.msg =="2"){
+                alert("Se ha alcanzado un límite de correos diarios")
+                limitedecorreos = false
+            }else if(res.msg =="3"){
+                alert("Debe de ingresar todos los parámetros para poder registrarse")
+                invalidparameter = false
+            }else if(res.msg =="4"){
+                invalidparameter = false
+            }else if(res.msg =="5"){
+                invalidparameter = false
+            }else if(res.msg == "0"){
+                alert(`Usuario ${datos.usuario} registrado correctamente`)
+                cambiarpagina('/adminusuarios');
+            }
+        }))
+        
+        cambiarpagina('/adminusuarios');
+        
     }
 
     useEffect(() => {
